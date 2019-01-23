@@ -18,6 +18,6 @@ describe("NBA store", function () {
     });
 
     it("should be able to select filter", () => {
-        categorypage.goToRandomCategory();
+        categorypage.goToRandomCategory().waitForFilterToBeSelected();
     });
 });

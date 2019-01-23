@@ -1,4 +1,4 @@
-import {browser, element, by, ElementFinder, ExpectedConditions  } from "protractor";
+import {browser, element, by, ElementFinder } from "protractor";
 
 export class FiltersContainer{
     filtersElments = element.all(by.repeater("option in filter.Options"));
@@ -17,9 +17,11 @@ export class FiltersContainer{
         browser.executeScript("arguments[0].scrollIntoView();", elem.getWebElement());
         browser.wait(() => elem.isDisplayed(), 5000);
 
-        elem.element(by.css(".description")).getText().then(str => {
+        elem.element(by.css(".description")).getText().then((str: string) => {
             elem.element(by.className("filterTick")).click();
-            expect(element(by.className("filterItem")).element(by.xpath(`./span[text()='${{str}}']`))).toBeDefined();
+
+            expect(element(by.xpath(`//*[contains(@class, 'filterItem') and span[text()='${str}']]`))
+                .element(by.className("filterSelected"))).toBeDefined();
             });
     }
 }
